@@ -295,9 +295,10 @@ class ServerHardware(ResourcePatchMixin, ResourceUtilizationMixin, Resource):
         """
         uri = "{}/remoteConsoleUrl".format(self.data["uri"])
 
-        if ip:
+        if ip and consoleType:
+            uri = "{}?ip={}&consoleType={}".format(uri, ip, consoleType)
+        elif ip:
             uri = "{}?ip={}".format(uri, ip)
-
         elif consoleType:
             uri = "{}?consoleType={}".format(uri, consoleType)
 
